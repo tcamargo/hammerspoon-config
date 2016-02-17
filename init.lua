@@ -17,6 +17,11 @@ end
 wifiWatcher = hs.wifi.watcher.new(muteSpeakersAtWorkCallback)
 wifiWatcher:start()
 
+-- ctrl+alt+del :)
+hs.hotkey.bind({"ctrl", "cmd"}, "delete", function()
+  hs.caffeinate.startScreensaver()
+end)
+
 -- Fancy configuration reloading
 hs.pathwatcher.new(hs.configdir, hs.reload):start()
 hs.alert.show("Config Reloaded")
