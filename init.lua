@@ -1,7 +1,7 @@
 local wifiWatcher = nil
 local SAPSSID = "SAP-Corporate"
 
-function ssidChangedCallback()
+function muteSpeakersAtWorkCallback()
     newSSID = hs.wifi.currentNetwork()
 
     if newSSID == SAPSSID then
@@ -11,5 +11,5 @@ function ssidChangedCallback()
     end
 end
 
-wifiWatcher = hs.wifi.watcher.new(ssidChangedCallback)
+wifiWatcher = hs.wifi.watcher.new(muteSpeakersAtWorkCallback)
 wifiWatcher:start()
