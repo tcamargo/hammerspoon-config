@@ -7,7 +7,7 @@ local noProxyLocation = {"Apple", "Location", "No proxy"}
 -- Location based settings
 -- @work: mute speakers, enable proxy
 -- elsewhere: disable proxy
-function atWorkCallback()
+function atWorkWifiCallback()
   local newSSID = hs.wifi.currentNetwork()
   local finder = hs.appfinder.appFromName("Finder")
 
@@ -27,7 +27,7 @@ function atWorkCallback()
     -- hs.alert("Proxy disabled")
   end
 end
-wifiWatcher = hs.wifi.watcher.new(atWorkCallback)
+wifiWatcher = hs.wifi.watcher.new(atWorkWifiCallback)
 wifiWatcher:start()
 
 -- ctrl+alt+del :)
@@ -38,3 +38,6 @@ end)
 -- Fancy configuration reloading
 hs.pathwatcher.new(hs.configdir, hs.reload):start()
 hs.notify.new({title="Hammerspoon", informativeText="Config Reloaded"}):send()
+
+-- Force wifi callback on (re)load
+atWorkWifiCallback()
