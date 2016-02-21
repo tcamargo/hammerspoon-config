@@ -24,8 +24,8 @@ function setNetworkLocation(location)
 end
 
 -- Location based settings
--- @work: mute speakers, enable proxy
--- elsewhere: disable proxy
+-- @work: mute speakers, enable proxy, lync available
+-- elsewhere: disable proxy, lync dnd
 function atWorkWifiCallback()
   local newSSID = hs.wifi.currentNetwork()
 
