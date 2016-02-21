@@ -1,8 +1,10 @@
 local log = hs.logger.new('discworld','debug')
 
 local workSSID = "SAP-Corporate"
-local proxyLocation = {"Apple", "Location", "SAP"}
-local noProxyLocation = {"Apple", "Location", "No proxy"}
+local networkLocation = {
+  Proxy = {"Apple", "Location", "SAP"},
+  NoProxy = {"Apple", "Location", "No proxy"}
+}
 local lyncStatus = {
   DND = {"Status", "Do Not Disturb"},
   Available = {"Status", "Available"}
@@ -21,7 +23,7 @@ end
 -- elsewhere: disable proxy
 function atWorkWifiCallback()
   local newSSID = hs.wifi.currentNetwork()
-  local finder = hs.appfinder.appFromName("Finder")
+  local finder = hs.application"Finder"
 
   -- do nothing on disconnections
   if newSSID == nil then
@@ -32,10 +34,10 @@ function atWorkWifiCallback()
     -- @work settings
     hs.alert("@work")
     hs.audiodevice.defaultOutputDevice():setVolume(0)
-    finder:selectMenuItem(proxyLocation)
+    finder:selectMenuItem(networkLocation["Proxy"])
     setLyncStatus(lyncStatus["Available"])
   else
-    finder:selectMenuItem(noProxyLocation)
+    finder:selectMenuItem(networkLocation["NoProxy"])
     setLyncStatus(lyncStatus["DND"])
   end
 end
