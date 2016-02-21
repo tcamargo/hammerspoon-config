@@ -3,6 +3,18 @@ local log = hs.logger.new('discworld','debug')
 local workSSID = "SAP-Corporate"
 local proxyLocation = {"Apple", "Location", "SAP"}
 local noProxyLocation = {"Apple", "Location", "No proxy"}
+local lyncStatus = {
+  DND = {"Status", "Do Not Disturb"},
+  Available = {"Status", "Available"}
+}
+
+-- function to set Microsoft Lync status
+function setLyncStatus(statusEntry)
+  lyncApp = hs.application"lync"
+  lyncApp:activate()
+  lyncApp:selectMenuItem(statusEntry)
+  lyncApp:hide()
+end
 
 -- Location based settings
 -- @work: mute speakers, enable proxy
@@ -21,10 +33,10 @@ function atWorkWifiCallback()
     hs.alert("@work")
     hs.audiodevice.defaultOutputDevice():setVolume(0)
     finder:selectMenuItem(proxyLocation)
-    -- hs.alert("Proxy enabled")
+    setLyncStatus(lyncStatus["Available"])
   else
     finder:selectMenuItem(noProxyLocation)
-    -- hs.alert("Proxy disabled")
+    setLyncStatus(lyncStatus["DND"])
   end
 end
 wifiWatcher = hs.wifi.watcher.new(atWorkWifiCallback)
