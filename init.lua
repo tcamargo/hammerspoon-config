@@ -18,12 +18,16 @@ function setLyncStatus(statusEntry)
   lyncApp:hide()
 end
 
+function setNetworkLocation(location)
+  local finder = hs.application"Finder"
+  finder:selectMenuItem(location)
+end
+
 -- Location based settings
 -- @work: mute speakers, enable proxy
 -- elsewhere: disable proxy
 function atWorkWifiCallback()
   local newSSID = hs.wifi.currentNetwork()
-  local finder = hs.application"Finder"
 
   -- do nothing on disconnections
   if newSSID == nil then
@@ -34,10 +38,10 @@ function atWorkWifiCallback()
     -- @work settings
     hs.alert("@work")
     hs.audiodevice.defaultOutputDevice():setVolume(0)
-    finder:selectMenuItem(networkLocation["Proxy"])
+    setNetworkLocation(networkLocation["Proxy"])
     setLyncStatus(lyncStatus["Available"])
   else
-    finder:selectMenuItem(networkLocation["NoProxy"])
+    setNetworkLocation(networkLocation["NoProxy"])
     setLyncStatus(lyncStatus["DND"])
   end
 end
