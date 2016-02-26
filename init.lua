@@ -15,7 +15,7 @@ function setLyncStatus(statusEntry)
   lyncApp = hs.application"lync"
   lyncApp:activate()
   lyncApp:selectMenuItem(statusEntry)
-  lyncApp:hide()
+  -- lyncApp:hide()
 end
 
 function setNetworkLocation(location)
