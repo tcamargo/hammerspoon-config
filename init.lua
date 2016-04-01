@@ -1,4 +1,4 @@
-local log = hs.logger.new('discworld','debug')
+logger = hs.logger.new('discworld','debug')
 
 local workSSID = "SAP-Corporate"
 local networkLocation = {
@@ -40,7 +40,7 @@ function atWorkWifiCallback()
 
   if newSSID == workSSID then
     -- @work settings
-    hs.alert("@work")
+    logger.d("@work")
     hs.audiodevice.defaultOutputDevice():setMuted(true)
     setNetworkLocation(networkLocation["Proxy"])
     setLyncStatus(lyncStatus["Available"])
