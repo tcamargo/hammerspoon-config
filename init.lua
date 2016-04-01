@@ -41,7 +41,7 @@ function atWorkWifiCallback()
   if newSSID == workSSID then
     -- @work settings
     hs.alert("@work")
-    hs.audiodevice.defaultOutputDevice():setVolume(0)
+    hs.audiodevice.defaultOutputDevice():setMuted(true)
     setNetworkLocation(networkLocation["Proxy"])
     setLyncStatus(lyncStatus["Available"])
   else
