@@ -7,7 +7,8 @@ local networkLocation = {
 }
 local lyncStatus = {
   DND = {"Status", "Do Not Disturb"},
-  Available = {"Status", "Available"}
+  Available = {"Status", "Available"},
+  OffWork = {"Status", "Off Work"}
 }
 
 -- function to set Microsoft Lync status
@@ -46,7 +47,7 @@ function atWorkWifiCallback()
     setLyncStatus(lyncStatus["Available"])
   else
     setNetworkLocation(networkLocation["NoProxy"])
-    setLyncStatus(lyncStatus["DND"])
+    setLyncStatus(lyncStatus["OffWork"])
   end
 end
 wifiWatcher = hs.wifi.watcher.new(atWorkWifiCallback)
