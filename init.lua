@@ -1,3 +1,5 @@
+require 'tabletools'
+
 logger = hs.logger.new('discworld','debug')
 
 local workSSID = "SAP-Corporate"
