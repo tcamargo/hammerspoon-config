@@ -77,15 +77,16 @@ hs.notify.new({title="Hammerspoon", informativeText="Config Reloaded"}):send()
 
 -- Per-device watcher to detect headphones in/out
 function audiodevwatch(dev_uid, event_name, event_scope, event_element)
-   logger.df("Audiodevwatch args: %s, %s, %s, %s", dev_uid, event_name, event_scope, event_element)
-   dev = hs.audiodevice.findDeviceByUID(dev_uid)
-   if event_name == 'jack' then
-      if dev:jackConnected() then
-        hs.audiodevice.defaultOutputDevice():setMuted(false)
-      else
-        hs.audiodevice.defaultOutputDevice():setMuted(true)
-      end
-   end
+  logger.df("audiodevwatch args: %s, %s, %s, %s", dev_uid, event_name, event_scope, event_element)
+  dev = hs.audiodevice.findDeviceByUID(dev_uid)
+  if event_name == 'jack' then
+    -- mute on headphones out
+    if dev:jackConnected() then
+      hs.audiodevice.defaultOutputDevice():setMuted(false)
+    else
+      hs.audiodevice.defaultOutputDevice():setMuted(true)
+    end
+  end
 end
 hs.audiodevice.current()['device']:watcherCallback(audiodevwatch):watcherStart()
 
