@@ -89,5 +89,13 @@ function audiodevwatch(dev_uid, event_name, event_scope, event_element)
 end
 hs.audiodevice.current()['device']:watcherCallback(audiodevwatch):watcherStart()
 
+-- TODO: Watcher to mute volume if USD headset is removed
+function usbwatch(event)
+  logger.df("usbwatch args: %s, %s, %s, %s, %s", event["eventType"],
+    event["productName"], event["vendorName"], event["vendorID"],
+    event["productID"])
+end
+hs.usb.watcher.new(usbwatch):start()
+
 -- Force wifi callback on (re)load
 atWorkWifiCallback()
