@@ -5,7 +5,7 @@ logger = hs.logger.new('discworld','debug')
 local workSSID = "SAP-Corporate"
 local networkLocation = {
   Proxy = {"Apple", "Location", "SAP"},
-  NoProxy = {"Apple", "Location", "No proxy"}
+  NoProxy = {"Apple", "Location", "Automatic"}
 }
 local lyncStatus = {
   DND = {"Status", "Do Not Disturb"},
