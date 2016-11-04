@@ -15,14 +15,14 @@ local lyncStatus = {
 
 -- function to set Microsoft Lync status
 function setLyncStatus(statusEntry)
-  lyncApp = hs.application"lync"
-  if lyncApp == nil then
-    -- lync not running
-    return
-  end
-  lyncApp:activate()
-  lyncApp:selectMenuItem(statusEntry)
-  -- lyncApp:hide()
+  -- lyncApp = hs.application"lync"
+  -- if lyncApp == nil then
+  --   -- lync not running
+  --   return
+  -- end
+  -- lyncApp:activate()
+  -- lyncApp:selectMenuItem(statusEntry)
+  -- -- lyncApp:hide()
 end
 
 function setNetworkLocation(location)
