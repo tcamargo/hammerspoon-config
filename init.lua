@@ -3,27 +3,6 @@ require 'tabletools'
 logger = hs.logger.new('discworld','debug')
 
 local workSSID = "SAP-Corporate"
-local networkLocation = {
-  Proxy = {"Apple", "Location", "SAP"},
-  NoProxy = {"Apple", "Location", "Automatic"}
-}
-local lyncStatus = {
-  DND = {"Status", "Do Not Disturb"},
-  Available = {"Status", "Available"},
-  OffWork = {"Status", "Off Work"}
-}
-
--- function to set Microsoft Lync status
-function setLyncStatus(statusEntry)
-  -- lyncApp = hs.application"lync"
-  -- if lyncApp == nil then
-  --   -- lync not running
-  --   return
-  -- end
-  -- lyncApp:activate()
-  -- lyncApp:selectMenuItem(statusEntry)
-  -- -- lyncApp:hide()
-end
 
 function setNetworkLocation(location)
   local finder = hs.application"Finder"
@@ -31,8 +10,8 @@ function setNetworkLocation(location)
 end
 
 -- Location based settings
--- @work: mute speakers, enable proxy, lync available
--- elsewhere: disable proxy, lync dnd
+-- @work: mute speakers
+-- elsewhere: 
 function atWorkWifiCallback()
   local newSSID = hs.wifi.currentNetwork()
 
@@ -45,11 +24,7 @@ function atWorkWifiCallback()
     -- @work settings
     logger.d("@work")
     hs.audiodevice.defaultOutputDevice():setMuted(true)
-    setNetworkLocation(networkLocation["Proxy"])
-    setLyncStatus(lyncStatus["Available"])
   else
-    setNetworkLocation(networkLocation["NoProxy"])
-    setLyncStatus(lyncStatus["OffWork"])
   end
 end
 wifiWatcher = hs.wifi.watcher.new(atWorkWifiCallback)
